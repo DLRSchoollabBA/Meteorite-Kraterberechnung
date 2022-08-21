@@ -41,12 +41,13 @@
             can.style.position = 'absolute';
             can.style.left = img.offsetLeft + "px";
             can.style.top = img.offsetTop + "px";
+            
 
             var r = d_crater / 1000;
 
             var ctx = can.getContext("2d");
             ctx.beginPath();
-            ctx.arc(160, 220, r, 0, Math.PI * 2, false);
+            ctx.arc(can.style.left+160, can.style.top+220, r, 0, Math.PI * 2, false);
             ctx.lineWidth = 3;
             ctx.strokeStyle = '#cc0000';
             ctx.clearRect(0, 0, can.width, can.height);
@@ -65,7 +66,7 @@
     <style>
       	body {
       		background: rgba(0,0,0,0);  /* transparent */
-          color: #222;
+            color: #222;
       	}
       
         td {
@@ -149,8 +150,10 @@
         </tr>
   <tr>
     <td>
+        <div id='mapmitkreis'>
         <img src='./img/Norddeutschland_Wiki.png' width='400' height='400' id='map'>    
         <canvas id='mycanvas' width='400' height='400'></canvas>
+        <\div>
     </td>
   </tr>
 </table>
