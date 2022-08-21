@@ -47,7 +47,7 @@
 
             var ctx = can.getContext("2d");
             ctx.beginPath();
-            ctx.arc(img.offsetLeft+500, img.offsetTop+220, r, 0, Math.PI * 2, false);
+            ctx.arc(img.offsetLeft, img.offsetTop, r, 0, Math.PI * 2, false);
             ctx.lineWidth = 3;
             ctx.strokeStyle = '#cc0000';
             ctx.clearRect(0, 0, can.width, can.height);
