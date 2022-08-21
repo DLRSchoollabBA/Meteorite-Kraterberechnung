@@ -47,7 +47,7 @@
 
             var ctx = can.getContext("2d");
             ctx.beginPath();
-            ctx.arc(can.style.left+160, can.style.top+220, r, 0, Math.PI * 2, false);
+            ctx.arc(img.offsetLeft+160, img.offsetTop+220, r, 0, Math.PI * 2, false);
             ctx.lineWidth = 3;
             ctx.strokeStyle = '#cc0000';
             ctx.clearRect(0, 0, can.width, can.height);
@@ -153,7 +153,7 @@
         <div id='mapmitkreis'>
         <img src='./img/Norddeutschland_Wiki.png' width='400' height='400' id='map'>    
         <canvas id='mycanvas' width='400' height='400'></canvas>
-        <\div>
+        <div>
     </td>
   </tr>
 </table>
