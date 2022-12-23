@@ -13,8 +13,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         function update() {
-            var ku = parseFloat(document.getElementById('in_ku').value);
-            document.getElementById('ku').innerHTML = "\\(" + ku.toFixed(2).replace('.', ',') + "\\)";
+            var ku = 1.45
 
             var dm = document.getElementById('in_dm').value;
             var du = document.getElementById('in_du').value;
@@ -94,8 +93,6 @@
     <h3>Größe des Einschlagkraters</h3>
     <table style="float:left;">
         <tr>
-            <td>\(K_U\)</td>
-            <td>\(\cdot\)</td>
             <td>\(\left( \frac {\rho_M}{\rho_U} \right)^\frac13\)
             <td>\(\cdot\)</td>
             <td>\(d_M^{0,78}\)</td>
@@ -103,13 +100,9 @@
             <td>\(v_M^{0,44}\)</td>
             <td>\(\cdot\)</td>
             <td>\(\sqrt[3]{sin \theta}\)</td>
-            <td>\(\cdot\)</td>
-            <td>\(g^{-0,22}\)</td>  
             
         </tr>
         <tr>
-            <td>Untergrundkonstante</td>
-            <td></td>
             <td>Dichte Meteorit<br />Dichte Untergrund</td>
             <td></td>
             <td>Durchmesser</td>
@@ -121,8 +114,6 @@
             <td></td>
         </tr>
         <tr>
-           <td><input type='range' min='0.8' max='1.5' step='0.01' value='1.45' id='in_ku' oninput='update();'></td>
-            <td></td>
             <td>
                 <input type='range' value='7000' min='800' max='8000' step='100' id='in_dm' oninput='update();'><br />
                 <input type='range' value='2000' min='800' max='8000' step='100' id='in_du' oninput='update();'>
@@ -135,8 +126,6 @@
             <td><input type='range' min='5' max='89' step='1' id='in_theta' value='45' oninput='update();'></td>
         </tr>
         <tr>
-            <td id='ku'></td>
-            <td>\(\cdot\)</td>
             <td id='rho'></td>
             <td>\(\cdot\)</td>
             <td id='size'></td>
@@ -144,8 +133,6 @@
             <td id='v'></td>
             <td>\(\cdot\)</td>
             <td id='theta'></td>
-            <td>\(\cdot\)</td>
-            <td id='g'>\(\left(9,8 \frac m {s^2} \right)^{-0,22}\)</td>
             <td>\(=\)</td>
             <td id='d'></td>
 
