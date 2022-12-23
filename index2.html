@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Kraterberechnung-DLR_School_Lab</title>
+
+    <!-- icon für den Tab, Ansicht im Browser -->
+    <link rel="icon" href="./img/DLR_Logo.png" type="image/icon type">
+
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        function update() {
+            var ku = parseFloat(document.getElementById('in_ku').value);
+            document.getElementById('ku').innerHTML = "\\(" + ku.toFixed(2).replace('.', ',') + "\\)";
+
+            var dm = document.getElementById('in_dm').value;
+            var du = document.getElementById('in_du').value;
+            document.getElementById('rho').innerHTML = "\\(\\left(\\frac {" + dm + " \\frac {kg}{m^3}} {" + du + " \\frac {kg}{m^3}}\\right)^\\frac 13\\)"
+
+            var D = Math.round(10 ** parseFloat(document.getElementById('in_size').value), 0);
+            document.getElementById('size').innerHTML = "\\(\\left(" + D + " m\\right)^{0,78}\\)";
+
+            var v = 1000 * Math.round(parseFloat(document.getElementById('in_v').value) * 8, 0);
+            document.getElementById('v').innerHTML = "\\(\\left(" + v + " \\frac m s\\right)^{0,44}\\)";
+
+            var theta = parseInt(document.getElementById('in_theta').value);
+            document.getElementById('theta').innerHTML = "\\(\\sqrt[3]{sin ~ " + theta + "°}\\)";
+
+            d_crater = ku * Math.pow(dm / du, 1 / 3) * Math.pow(D, 0.78) * Math.pow(v, 0.44) * Math.pow(Math.sin(theta * Math.PI / 180), 1 / 3) * 0.605;
+            document.getElementById('d').innerHTML = "\\(" + (d_crater / 1000).toFixed(2) + " km\\)";
+
+            MathJax.typesetPromise();
+            updateImage();
+
+        }
+
+        function updateImage() {
+            can.style.position = 'absolute';
+            can.style.left = img.offsetLeft + "px";
+            can.style.top = img.offsetTop + "px";
+            
+
+            var r = d_crater / 1000;
+
+            var ctx = can.getContext("2d");
+            ctx.beginPath();
+            ctx.arc(200,200, r, 0, Math.PI * 2, false);
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#cc0000';
+            ctx.clearRect(0, 0, can.width, can.height);
+            ctx.stroke();
+        }
+
+        var img = null;
+        var can = null;
+        var d_crater = 0;
+        window.onload = (() => {
+            img = document.getElementById("map");
+            can = document.getElementById("mycanvas");
+            update();
+        });
+    </script>
+    <style>
+      	body {
+      		background: rgba(0,0,0,0);  /* transparent */
+            color: #222;
+      	}
+      
+        td {
+            text-align: center;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .vrange {
+            width: 200px;
+            margin-top: 100px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            /*do same for other browsers if required*/
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Größe des Einschlagkraters</h3>
+    <table style="float:left;">
+        <tr>
+            <td>\(K_U\)</td>
+            <td>\(\cdot\)</td>
+            <td>\(\left( \frac {\rho_M}{\rho_U} \right)^\frac13\)
+            <td>\(\cdot\)</td>
+            <td>\(d_M^{0,78}\)</td>
+            <td>\(\cdot\)</td>
+            <td>\(v_M^{0,44}\)</td>
+            <td>\(\cdot\)</td>
+            <td>\(\sqrt[3]{sin \theta}\)</td>
+            <td>\(\cdot\)</td>
+            <td>\(g^{-0,22}\)</td>  
+            
+        </tr>
+        <tr>
+            <td>Untergrundkonstante</td>
+            <td></td>
+            <td>Dichte Meteorit<br />Dichte Untergrund</td>
+            <td></td>
+            <td>Durchmesser</td>
+            <td></td>
+            <td>Geschwindigkeit</td>
+            <td></td>
+            <td>Einschlagwinkel</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+           <td><input type='range' min='0.8' max='1.5' step='0.01' value='1.45' id='in_ku' oninput='update();'></td>
+            <td></td>
+            <td>
+                <input type='range' value='7000' min='800' max='8000' step='100' id='in_dm' oninput='update();'><br />
+                <input type='range' value='2000' min='800' max='8000' step='100' id='in_du' oninput='update();'>
+            </td>
+            <td></td>
+            <td><input type='range' min='0.1' max='4' step='0.05' id='in_size' value='3.5' oninput='update();'></td>
+            <td></td>
+            <td><input type='range' min='1' max='9' step='0.05' id='in_v' value='5.5' oninput='update();'></td>
+            <td></td>
+            <td><input type='range' min='5' max='89' step='1' id='in_theta' value='45' oninput='update();'></td>
+        </tr>
+        <tr>
+            <td id='ku'></td>
+            <td>\(\cdot\)</td>
+            <td id='rho'></td>
+            <td>\(\cdot\)</td>
+            <td id='size'></td>
+            <td>\(\cdot\)</td>
+            <td id='v'></td>
+            <td>\(\cdot\)</td>
+            <td id='theta'></td>
+            <td>\(\cdot\)</td>
+            <td id='g'>\(\left(9,8 \frac m {s^2} \right)^{-0,22}\)</td>
+            <td>\(=\)</td>
+            <td id='d'></td>
+
+  </tr>
+</table>
+         
+<table style="position: absolute; left: 1100px; top:5px;">
+     <tr>
+    <td>      
+        <img src='./img/Norddeutschland_Wiki.png' width='400' height='400' id='map'>
+        <canvas id='mycanvas' width='400' height='400' style="position: absolute; left: 5px; top: 300px;"></canvas>
+ 
+    </td>
+      </tr>
+</table>
+        
+<table style="float:left;">    
+    <tr>
+    <td> 
+       <a href="https://dlrschoollabba.github.io/Meteorite-Energieberechnung">Hier gehts zur Energieberechnung des Einschlags.</a>
+</td>
+      </tr>
+</table>
+  <!-- Die folgende Tabelle zeigt, wie man die Formel auch häßlich, aber mit HTML hinbekommt -->
+  
+  <!--
+    <table>
+      <tr>
+        <td>K<sub>U</sub>&middot;</td>
+        <td>
+           <table>
+             <tr><td style='border-bottom:1px solid black;'>&rho;<sub>M</sub><sup>&frac13;</sup></td></tr>
+             <tr><td>&rho;<sub>U</sub><sup>&frac13;</sup></td></tr>
+          </table>
+        </td>
+        <td>&middot;d<sub>M</sub><sup style='position: relative; left: -0.7em; top: -0.4em;'>0,78</sup></td>
+        <td>&middot;v<sub>M</sub><sup style='position: relative; left: -0.7em; top: -0.4em;'>0,44</sup></td>
+        <td>&middot;(sin &theta;)<sup>&frac13;</sup></td>
+        <td>&middot;g<sup>-0,22</sup></td>
+      </tr>
+  </table> -->
+ 
+</body>
+
+</html>
