@@ -20,10 +20,10 @@
             document.getElementById('rho').innerHTML = "\\(\\left(\\frac {" + dm + " \\frac {kg}{m^3}} {" + du + " \\frac {kg}{m^3}}\\right)^\\frac 13\\)"
 
             var D = Math.round(10 ** parseFloat(document.getElementById('in_size').value), 0);
-            document.getElementById('size').innerHTML = "\\(\\left(" + D + " m\\right)^{0,78}\\)";
+            document.getElementById('size').innerHTML = "\\(\\left(" + D/1000 + " km\\right)^{0,78}\\)";
 
             var v = Math.round(10 ** parseFloat(document.getElementById('in_v').value), 0);
-            document.getElementById('v').innerHTML = "\\(\\left(" + v + " \\frac m s\\right)^{0,44}\\)";
+            document.getElementById('v').innerHTML = "\\(\\left(" + v/1000 + " \\frac km s\\right)^{0,44}\\)";
 
             var theta = parseInt(document.getElementById('in_theta').value);
             document.getElementById('theta').innerHTML = "\\(\\sqrt[3]{sin ~ " + theta + "°}\\)";
