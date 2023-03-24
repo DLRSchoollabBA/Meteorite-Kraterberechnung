@@ -26,7 +26,7 @@
             document.getElementById('v').innerHTML = "\\(\\left(" + v/1000 + " \\frac {km}{s}\\right)^{0,44}\\)";
 
             var theta = parseInt(document.getElementById('in_theta').value);
-            document.getElementById('theta').innerHTML = "\\(\\sqrt[3]{sin ~ " + theta + "°}\\)";
+            document.getElementById('theta').innerHTML = "\\(\\{sin ~ " + theta + "°}^\frac13\\)";
             
             var const_var = ku * 0.605;
             document.getElementById('const_id').innerHTML = "\\(" + (const_var).toFixed(2) + "\\)";
@@ -104,7 +104,7 @@
             <td>\(\cdot\)</td>
             <td>\(v_M^{0,44}\)</td>
             <td>\(\cdot\)</td>
-            <td>\(\sqrt[3]{sin \theta}\)</td>
+            <td>\({sin \theta}^\frac13\)</td>
             <td>\cdot</td>
             
         </tr>
